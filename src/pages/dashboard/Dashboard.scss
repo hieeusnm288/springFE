@@ -1,0 +1,30 @@
+.ant-layout-sider {
+    min-height: 100vh;
+}
+
+// .ant-layout-sider {
+//     min-width: 300px !important;
+// }
+
+// svg {
+//     height: 1.8em;
+//     width : 1.8em;
+// }
+.fix-top {
+    overflow: auto !important;
+    height  : 100vh !important;
+    position: fixed !important;
+    left    : 0 !important;
+    top     : 0 !important;
+    bottom  : 0;
+}
+
+.fix-content {
+    margin-left: 200px;
+    height     : 100vh;
+
+    h1 {
+        margin     : auto;
+        margin-left: 30px;
+    }
+}
