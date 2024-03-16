@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import withRouter from "../../helpers/withRouter";
-import { Button, Form, Input, Select, Space } from "antd";
+import { Button, Form, Input, Select, Space, notification } from "antd";
 import { LeftOutlined } from "@ant-design/icons";
+import {
+  getCategory,
+  insertCategory,
+  updateCategory,
+} from "../../redux/slice/categorySlice";
+import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 
 const { Option } = Select;
 const layout = {
@@ -21,13 +28,68 @@ const tailLayout = {
 
 function AddOrEdit() {
   const [form] = Form.useForm();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { id } = useParams();
 
   const onFinish = (values) => {
     console.log(values);
+    if (id) {
+      form.validateFields().then((values) => {
+        dispatch(
+          updateCategory({
+            name: values.name,
+            id: id,
+            status: values.status,
+          })
+        ).then((res) => {
+          if (res.payload) {
+            notification.open({
+              message: "Thành công!",
+              description: "Dữ liệu đã được cập nhật",
+              type: "success",
+            });
+            navigate("/categories");
+          }
+        });
+      });
+    } else {
+      dispatch(insertCategory(values)).then((res) => {
+        if (res.payload) {
+          notification.open({
+            message: "Thành công!",
+            description: "Dữ liệu đã được cập nhật",
+            type: "success",
+          });
+          navigate("/categories");
+        }
+      });
+    }
   };
   const onReset = () => {
     form.resetFields();
   };
+
+  useEffect(() => {
+    if (id) {
+      dispatch(getCategory(id)).then((res) => {
+        if (id) {
+          form.setFieldsValue({
+            name: res.payload.name,
+            status: 0,
+          });
+        }
+      });
+    } else {
+      form.setFieldsValue({
+        name: "",
+        status: 0,
+      });
+    }
+  }, [id]);
+
+  // console.log(id);
+
   return (
     <div>
       <h3>

@@ -1,20 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import rootReducer from "./rootReducers";
+import categorySlice from "./slice/categorySlice";
+import brandSlice from "./slice/brandSlice";
 
-const initialState = {};
-
-function configureAppStore(preLoadedState) {
-  const store = configureStore({
-    reducer: rootReducer,
-    preloadedState: preLoadedState,
-  });
-
-  if (process.env.NODE_ENV !== "production" && module.hot) {
-    module.hot.accept("./rootReducers");
-    store.replaceReducer(rootReducer);
-  }
-
-  return store;
-}
-
-export default configureAppStore(initialState);
+const store = configureStore({
+  reducer: {
+    category: categorySlice.reducer,
+    brand: brandSlice.reducer,
+  },
+});
+export default store;

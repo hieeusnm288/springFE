@@ -5,44 +5,40 @@ import {
   Button,
   Space,
   Table,
-  Tag,
   Modal,
   Pagination,
   notification,
+  Image,
 } from "antd";
 import { MdDelete, MdModeEditOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCategory, getListCate } from "../../redux/slice/categorySlice";
+import { deleteBrand, getListBrand } from "../../redux/slice/brandSlice";
 import { useNavigate } from "react-router-dom";
-function ListCatagories() {
-  // const onDelete = (cate) => {
-  //   console.log(cate);
-  // };
+
+function ListBrand() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [categoryDetail, setCategoryDeatil] = useState();
+  const [brandDetail, setBrandDetail] = useState();
   const dispatch = useDispatch();
-  const { listCategory, totalElements } = useSelector(
-    (state) => state.category
-  );
+  const { listBrand, totalElements } = useSelector((state) => state.brand);
   useEffect(() => {
-    dispatch(getListCate(0));
+    dispatch(getListBrand(0));
   }, [dispatch]);
   const navigate = useNavigate();
   // console.log(listCategory);
-  const showModal = (cate) => {
+  const showModal = (brand) => {
     setIsModalOpen(true);
-    setCategoryDeatil(cate);
+    setBrandDetail(brand);
   };
   const handleOk = () => {
     setIsModalOpen(false);
-    dispatch(deleteCategory(categoryDetail?.id)).then((res) => {
+    dispatch(deleteBrand(brandDetail?.id)).then((res) => {
       if (res.payload) {
         notification.open({
           message: "Thành công!",
           description: "Dữ liệu đã được cập nhật",
           type: "success",
         });
-        dispatch(getListCate(0));
+        dispatch(getListBrand(0));
       }
     });
   };
@@ -50,13 +46,13 @@ function ListCatagories() {
     setIsModalOpen(false);
   };
 
-  const handleEdit = (cate) => {
-    // console.log(cate);
-    navigate(`/category/add/${cate.id}`);
+  const handleEdit = (brand) => {
+    console.log(brand);
+    navigate(`/brand/add/${brand.id}`);
   };
 
   const conChangePage = (page) => {
-    dispatch(getListCate(page - 1));
+    dispatch(getListBrand(page - 1));
   };
 
   const columns = [
@@ -74,16 +70,14 @@ function ListCatagories() {
       width: 900,
     },
     {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
+      title: "Logo",
+      dataIndex: "logo",
+      key: "logo",
       render: (_, record) => (
-        <Tag
-          color={record.status === "Visible" ? "green" : "red"}
-          key={record.status}
-        >
-          {record.status === "Visible" ? "Visible" : "Invisible"}
-        </Tag>
+        <Image
+          src={`http://localhost:8080/api/v1/brand/logo/${record.logo}`}
+          width={50}
+        />
       ),
     },
 
@@ -114,10 +108,7 @@ function ListCatagories() {
 
   return (
     <div>
-      <h3>
-        <LeftOutlined /> List Category
-      </h3>
-      <Table columns={columns} dataSource={listCategory} pagination={false} />
+      <Table columns={columns} dataSource={listBrand} pagination={false} />
       <Pagination
         total={totalElements}
         onChange={conChangePage}
@@ -129,12 +120,10 @@ function ListCatagories() {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <p>
-          Bạn có muốn xóa Category: {categoryDetail ? categoryDetail.name : ""}
-        </p>
+        <p>Bạn có muốn xóa Brand: {brandDetail ? brandDetail.name : ""}</p>
       </Modal>
     </div>
   );
 }
 
-export default withRouter(ListCatagories);
+export default ListBrand;

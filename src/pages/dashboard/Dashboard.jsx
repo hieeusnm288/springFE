@@ -15,6 +15,8 @@ import { Outlet, Route, Routes, useNavigate } from "react-router-dom";
 import Home from "../home/Home";
 import AddOrEdit from "../category/AddOrEdit";
 import ListCatagories from "../category/ListCatagories";
+import ListBrand from "../brand/ListBrand";
+import AddOrEditBrand from "../brand/AddOrEditBrand";
 
 const { Header, Sider, Content } = Layout;
 function Dashboard() {
@@ -86,11 +88,13 @@ function Dashboard() {
                     key: "9",
                     icon: <IoMdAddCircleOutline />,
                     label: "Add Brand",
+                    onClick: () => navigate("/brand/add"),
                   },
                   {
                     key: "10",
                     icon: <FaRegListAlt />,
                     label: "List Brands",
+                    onClick: () => navigate("/listbrand"),
                   },
                 ],
               },
@@ -152,9 +156,10 @@ function Dashboard() {
             <Routes>
               <Route element={<Home />} path="/"></Route>
               <Route element={<AddOrEdit />} path="/category/add"></Route>
+              <Route element={<AddOrEdit />} path="/category/add/:id"></Route>
               <Route element={<ListCatagories />} path="/categories"></Route>
-              {/* <Route element={<Home />} path="/"></Route> */}
-              {/* <Route element={<Home />} path="/"></Route> */}
+              <Route element={<ListBrand />} path="/listbrand"></Route>
+              <Route element={<AddOrEditBrand />} path="/brand/add"></Route>
             </Routes>
             <Outlet></Outlet>
           </Content>
