@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import withRouter from "../../helpers/withRouter";
-import { LeftOutlined } from "@ant-design/icons";
 import {
   Button,
   Space,
@@ -114,9 +113,7 @@ function ListCatagories() {
 
   return (
     <div>
-      <h3>
-        <LeftOutlined /> List Category
-      </h3>
+      <h3>List Category</h3>
       <Table columns={columns} dataSource={listCategory} pagination={false} />
       <Pagination
         total={totalElements}

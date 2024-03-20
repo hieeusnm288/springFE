@@ -92,9 +92,7 @@ function AddOrEdit() {
 
   return (
     <div>
-      <h3>
-        <LeftOutlined /> Add Category
-      </h3>
+      <h3>{id ? "Update Category" : " Add Category"}</h3>
       <div>
         <Form
           {...layout}
