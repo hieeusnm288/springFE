@@ -3,8 +3,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getListBrand = createAsyncThunk(
   "brand/getListBrand",
-  async (page) => {
-    const listBrand = await brandService.getListBrand(page);
+  async (key) => {
+    const listBrand = await brandService.getListBrand(key);
     return listBrand;
   }
 );
@@ -24,6 +24,7 @@ export const insertBrand = createAsyncThunk(
 export const updateBrand = createAsyncThunk(
   "brand/updateBrand",
   async (data) => {
+    console.log("slice", data);
     const updateBrand = await brandService.updateBrand(data);
     return updateBrand;
   }
@@ -36,6 +37,13 @@ export const getDetailBrand = createAsyncThunk(
     return detailBrand;
   }
 );
+export const getLogoBrand = createAsyncThunk(
+  "brand/getLogoBrand",
+  async (logo) => {
+    const logoBrand = await brandService.getLogoBrand(logo);
+    return logoBrand;
+  }
+);
 
 const brandSlice = createSlice({
   name: "brand",
@@ -46,6 +54,7 @@ const brandSlice = createSlice({
     number: 0,
     listBrand: [],
     detailBrand: {},
+    logoBrand: "",
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -72,6 +81,16 @@ const brandSlice = createSlice({
       .addCase(getDetailBrand.fulfilled, (state, action) => {
         state.loadingBrand = false;
         state.detailBrand = action.payload;
+      })
+      .addCase(getLogoBrand.pending, (state) => {
+        state.loadingBrand = true;
+      })
+      .addCase(getLogoBrand.rejected, (state) => {
+        state.loadingBrand = false;
+      })
+      .addCase(getLogoBrand.fulfilled, (state, action) => {
+        state.loadingBrand = false;
+        state.logoBrand = action.payload;
       });
   },
 });

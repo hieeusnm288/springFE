@@ -160,6 +160,7 @@ function Dashboard() {
               <Route element={<ListCatagories />} path="/categories"></Route>
               <Route element={<ListBrand />} path="/listbrand"></Route>
               <Route element={<AddOrEditBrand />} path="/brand/add"></Route>
+              <Route element={<AddOrEditBrand />} path="/brand/add/:id"></Route>
             </Routes>
             <Outlet></Outlet>
           </Content>

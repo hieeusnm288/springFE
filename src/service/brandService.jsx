@@ -1,8 +1,10 @@
 import axios from "./customaxios";
 
 const brandService = {
-  getListBrand(page) {
-    return axios.get(`/brand/page?size=10&sort=id&page=${page}`);
+  getListBrand(key) {
+    return axios.get(
+      `/brand/find?query=${key.query}&size=5&sort=id&page=${key.page}`
+    );
   },
   deleteBrand(id) {
     return axios.delete(`/brand/${id}`);
@@ -10,11 +12,24 @@ const brandService = {
   getDetailBrand(id) {
     return axios.get(`/brand/${id}`);
   },
-  updateBrand(data) {
-    return axios.get(`/brand/${data.id}`, data);
+  getLogoBrand(logo) {
+    return axios.get(`/brand/${logo}`);
   },
-  insertBrand(data) {
-    return axios.get(`/brand`, data);
+  updateBrand(brand) {
+    let formData = new FormData();
+    formData.append("name", brand.name);
+    if (brand.logoFile[0].originFileObj) {
+      formData.append("logoFile", brand.logoFile[0].originFileObj);
+    }
+    return axios.put(`/brand/${brand.id}`, formData);
+  },
+  insertBrand(brand) {
+    let formData = new FormData();
+    formData.append("name", brand.name);
+    if (brand.logoFile[0].originFileObj) {
+      formData.append("logoFile", brand.logoFile[0].originFileObj);
+    }
+    return axios.post("/brand", formData);
   },
 };
 

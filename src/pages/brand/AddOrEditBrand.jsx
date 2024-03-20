@@ -1,16 +1,11 @@
-import { Button, Form, Input, Select, Space, Upload, notification } from "antd";
-import { LeftOutlined, PlusOutlined } from "@ant-design/icons";
-import {
-  getDetailBrand,
-  updateBrand,
-  insertBrand,
-} from "../../redux/slice/brandSlice";
+import { Button, Form, Input, Space, Upload, notification } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
+import { getDetailBrand, insertBrand } from "../../redux/slice/brandSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import withRouter from "../../helpers/withRouter";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-const { Option } = Select;
 const layout = {
   labelCol: {
     span: 8,
@@ -30,59 +25,47 @@ function AddOrEditBrand() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
+  const [brandDetial, setBrandDetail] = useState({
+    name: "",
+    logo: "",
+  });
 
   const onFinish = (values) => {
-    console.log(values);
-    // if (id) {
-    //   form.validateFields().then((values) => {
-    //     dispatch(
-    //       updateBrand({
-    //         name: values.name,
-    //         id: id,
-    //         status: values.status,
-    //       })
-    //     ).then((res) => {
-    //       if (res.payload) {
-    //         notification.open({
-    //           message: "Thành công!",
-    //           description: "Dữ liệu đã được cập nhật",
-    //           type: "success",
-    //         });
-    //         navigate("/categories");
-    //       }
-    //     });
-    //   });
-    // } else {
-    //   dispatch(insertBrand(values)).then((res) => {
-    //     if (res.payload) {
-    //       notification.open({
-    //         message: "Thành công!",
-    //         description: "Dữ liệu đã được cập nhật",
-    //         type: "success",
-    //       });
-    //       navigate("/categories");
-    //     }
-    //   });
-    // }
-  };
-  const onReset = () => {
-    form.resetFields();
+    form.validateFields().then((values) => {
+      dispatch(
+        insertBrand({
+          name: values.name,
+          logoFile: values.logoFile,
+        })
+      ).then((res) => {
+        if (res.payload) {
+          notification.open({
+            message: "Thành công!",
+            description: "Dữ liệu đã được cập nhật",
+            type: "success",
+          });
+          navigate("/listbrand");
+        }
+      });
+    });
   };
 
+  console.log(brandDetial);
   useEffect(() => {
     if (id) {
       dispatch(getDetailBrand(id)).then((res) => {
         if (id) {
           form.setFieldsValue({
             name: res.payload.name,
-            status: 0,
+          });
+          setBrandDetail({
+            logo: res.payload.logo,
           });
         }
       });
     } else {
       form.setFieldsValue({
         name: "",
-        status: 0,
       });
     }
   }, [id]);
@@ -90,16 +73,16 @@ function AddOrEditBrand() {
     if (Array.isArray(e)) {
       return e;
     }
-    console.log(e);
-    return e?.fileList;
+    if (e.fileList.length > 1) {
+      return [e.fileList[1]];
+    }
+    return e && e.fileList;
   };
   // console.log(id);
 
   return (
     <div>
-      <h3>
-        <LeftOutlined /> Add Category
-      </h3>
+      <h3>{id ? "Update Brand" : "Add Brand"}</h3>
       <div>
         <Form
           {...layout}
@@ -123,11 +106,23 @@ function AddOrEditBrand() {
             <Input />
           </Form.Item>
           <Form.Item
-            label="Upload"
+            label="Upload Logo"
+            name="logoFile"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
             valuePropName="fileList"
             getValueFromEvent={normFile}
           >
-            <Upload action="/upload.do" listType="picture-card">
+            <Upload
+              // action="/upload.do"
+              listType="picture-card"
+              accept=".jpg,.png,.gif"
+              maxCount={1}
+              beforeUpload={() => false}
+            >
               <button
                 style={{
                   border: 0,
@@ -150,9 +145,6 @@ function AddOrEditBrand() {
             <Space>
               <Button type="primary" htmlType="submit">
                 Submit
-              </Button>
-              <Button htmlType="button" onClick={onReset}>
-                Reset
               </Button>
             </Space>
           </Form.Item>
