@@ -124,7 +124,7 @@ function ListBrand() {
       key: "logo",
       render: (_, record) => (
         <Image
-          src={`http://localhost:8080/api/v1/brand/logo/${record.logo}`}
+          src={`https://springbe-production.up.railway.app/api/v1/brand/logo/${record.logo}`}
           width={50}
         />
       ),
