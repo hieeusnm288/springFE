@@ -250,7 +250,7 @@ function ListBrand() {
             initialValue={[
               {
                 url: brandDetail
-                  ? `http://localhost:8080/api/v1/brand/logo/${brandDetail.logo}`
+                  ? `https://springbe-production.up.railway.app/api/v1/brand/logo/${brandDetail.logo}`
                   : "",
               },
             ]}
