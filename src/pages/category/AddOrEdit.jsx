@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import withRouter from "../../helpers/withRouter";
 import { Button, Form, Input, Select, Space, notification } from "antd";
-import { LeftOutlined } from "@ant-design/icons";
+
 import {
   getCategory,
   insertCategory,
@@ -9,7 +9,6 @@ import {
 } from "../../redux/slice/categorySlice";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import Dashboard from "../../components/dashboard/Dashboard";
 
 const { Option } = Select;
 const layout = {
@@ -43,6 +42,7 @@ function AddOrEdit() {
             status: values.status,
           })
         ).then((res) => {
+          console.log(res);
           if (res.payload) {
             notification.open({
               message: "Thành công!",
@@ -55,6 +55,7 @@ function AddOrEdit() {
       });
     } else {
       dispatch(insertCategory(values)).then((res) => {
+        console.log(res);
         if (res.payload) {
           notification.open({
             message: "Thành công!",
@@ -86,12 +87,12 @@ function AddOrEdit() {
         status: 0,
       });
     }
-  }, [id]);
+  }, [dispatch, form, id]);
 
   // console.log(id);
 
   return (
-    <Dashboard>
+    <div>
       <h3>{id ? "Update Category" : " Add Category"}</h3>
       <div>
         <Form
@@ -167,7 +168,7 @@ function AddOrEdit() {
           </Form.Item>
         </Form>
       </div>
-    </Dashboard>
+    </div>
   );
 }
 

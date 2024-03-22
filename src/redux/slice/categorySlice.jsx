@@ -13,6 +13,7 @@ export const getListCate = createAsyncThunk(
   "category/getListCate",
   async (page) => {
     const listCategory = await categoryService.getListCate(page);
+    console.log("tren", listCategory);
     return listCategory;
   }
 );
@@ -62,6 +63,7 @@ const categorySlice = createSlice({
       })
       .addCase(getListCate.fulfilled, (state, action) => {
         state.loadingCate = false;
+        console.log("action", action);
         state.listCategory = action.payload.content;
         state.totalPages = action.payload.totalPages;
         state.number = action.payload.number;

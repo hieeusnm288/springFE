@@ -27,4 +27,13 @@
         margin     : auto;
         margin-left: 30px;
     }
+
+}
+
+.app-header {
+    position  : relative;
+    z-index   : 50;
+    width     : 100%;
+    background: #fff;
+    padding   : 0 25px
 }

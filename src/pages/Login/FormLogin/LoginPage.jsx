@@ -23,7 +23,7 @@ function LoginPage() {
             onFinishFailed={onFinishFailed}
             layout="vertical"
           >
-            <h2>Member login</h2>
+            <h2>Member Login</h2>
             <Form.Item
               label="Email"
               name="email"

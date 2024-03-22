@@ -7,10 +7,7 @@ import { BiLogoShopify, BiCategoryAlt } from "react-icons/bi";
 import { LiaFileInvoiceDollarSolid } from "react-icons/lia";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { FaRegListAlt } from "react-icons/fa";
-import { BiSignal5 } from "react-icons/bi";
-import { CgProfile } from "react-icons/cg";
 import "./Dashboard.scss";
-import { MdOutlineManageAccounts, MdLogout } from "react-icons/md";
 import { Outlet, useNavigate } from "react-router-dom";
 
 const { Header, Sider, Content } = Layout;
@@ -53,7 +50,7 @@ function Dashboard({ children }) {
                     key: "4",
                     icon: <FaRegListAlt />,
                     label: "List Categories",
-                    onClick: () => navigate("/categories"),
+                    onClick: () => navigate("/list-category"),
                   },
                 ],
               },
@@ -89,7 +86,7 @@ function Dashboard({ children }) {
                     key: "10",
                     icon: <FaRegListAlt />,
                     label: "List Brands",
-                    onClick: () => navigate("/listbrand"),
+                    onClick: () => navigate("/list-brands"),
                   },
                 ],
               },
@@ -97,26 +94,6 @@ function Dashboard({ children }) {
                 key: "11",
                 icon: <LiaFileInvoiceDollarSolid />,
                 label: "Invoice",
-              },
-              {
-                key: "12",
-                icon: <BiSignal5 />,
-                label: "statistic",
-              },
-              {
-                key: "13",
-                icon: <CgProfile />,
-                label: "Profile",
-              },
-              {
-                key: "14",
-                icon: <MdOutlineManageAccounts />,
-                label: "Account",
-              },
-              {
-                key: "15",
-                icon: <MdLogout />,
-                label: "Logout",
               },
             ]}
           />

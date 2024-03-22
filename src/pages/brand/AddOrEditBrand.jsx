@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import withRouter from "../../helpers/withRouter";
 import { useEffect, useState } from "react";
-import Dashboard from "../../components/dashboard/Dashboard";
 
 const layout = {
   labelCol: {
@@ -69,7 +68,7 @@ function AddOrEditBrand() {
         name: "",
       });
     }
-  }, [id]);
+  }, [id, form, dispatch]);
   const normFile = (e) => {
     if (Array.isArray(e)) {
       return e;
@@ -82,7 +81,7 @@ function AddOrEditBrand() {
   // console.log(id);
 
   return (
-    <Dashboard>
+    <div>
       <h3>{id ? "Update Brand" : "Add Brand"}</h3>
       <div>
         <Form
@@ -151,7 +150,7 @@ function AddOrEditBrand() {
           </Form.Item>
         </Form>
       </div>
-    </Dashboard>
+    </div>
   );
 }
 

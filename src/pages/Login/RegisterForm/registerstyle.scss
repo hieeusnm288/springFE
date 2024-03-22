@@ -1,30 +1,30 @@
 .register {
+    background: radial-gradient(rgb(210, 241, 223), rgb(211, 215, 250), rgb(186, 216, 244)) 0% 0% / 400% 400%;
+
     Input {
-        display               : block;
-        margin                : auto;
-        padding               : 10px;
-        margin-top            : 10px;
-        // border-radius      : 25px;
-        border                : 1px solid rgba(0, 0, 0, 0);
-        background            : #fff;
-        // box-shadow   : 0 1px 3px rgb(0 0 0 / 20%);
-        font-size             : 15px;
+        display            : block;
+        margin             : auto;
+        padding            : 10px;
+        margin-top         : 10px;
+        border             : 1px solid rgba(0, 0, 0);
+        background         : #fff;
+        font-size          : 15px;
         // width           : 250px;
-        outline               : none;
+        outline            : none;
     }
 
     Button {
-        width     : 100%;
-        border    : 1px solid rgba(0, 0, 0, 0);
-        margin-top: 10px;
+        width        : 100%;
+        border       : 1px solid rgba(0, 0, 0, 0);
+        margin-top   : 10px;
+        // padding   : 10px;
     }
 
 
     .container {
-        display       : grid;
-        place-items   : center;
-        // margin-top : 50px;
-        height        : 100vh;
+        display    : grid;
+        place-items: center;
+        height     : 100vh;
     }
 
     .login-box {
@@ -33,7 +33,7 @@
         padding      : 50px;
         border-radius: 10px;
         box-shadow   : 0 32px 64px rgb(0 0 0 / 20%);
-        background   : rgba(190, 182, 182, 0.562);
+        background   : #fff;
     }
 
     .login-now {

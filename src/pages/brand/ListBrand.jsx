@@ -23,7 +23,6 @@ import {
 } from "../../redux/slice/brandSlice";
 
 import { PlusOutlined } from "@ant-design/icons";
-import Dashboard from "../../components/dashboard/Dashboard";
 
 function ListBrand() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -38,7 +37,7 @@ function ListBrand() {
 
   useEffect(() => {
     dispatch(getListBrand(key));
-  }, [key]);
+  }, [key, dispatch]);
 
   // console.log(listCategory);
   const showModal = (brand) => {
@@ -177,7 +176,7 @@ function ListBrand() {
     );
   };
   return (
-    <Dashboard>
+    <div>
       <label className="mb-1">Tìm kiếm Brand: </label>
       <Row gutter={16} className="mb-5">
         <Col span={22}>
@@ -291,7 +290,7 @@ function ListBrand() {
           </Form.Item>
         </Form>
       </Modal>
-    </Dashboard>
+    </div>
   );
 }
 

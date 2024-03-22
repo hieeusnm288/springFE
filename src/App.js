@@ -1,31 +1,49 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 
 import { Provider } from "react-redux";
 import store from "./redux/store";
-import LoginPage from "./pages/Login/FormLogin/LoginPage";
-import Register from "./pages/Login/RegisterForm/Register";
-import AddOrEdit from "./pages/category/AddOrEdit";
-import ListCatagories from "./pages/category/ListCatagories";
-import ListBrand from "./pages/brand/ListBrand";
-import AddOrEditBrand from "./pages/brand/AddOrEditBrand";
+// import LoginPage from "./pages/Login/FormLogin/LoginPage";
+// import Register from "./pages/Login/RegisterForm/Register";
+// import AddOrEdit from "./pages/category/AddOrEdit";
+// import ListCatagories from "./pages/category/ListCatagories";
+// import ListBrand from "./pages/brand/ListBrand";
+// import AddOrEditBrand from "./pages/brand/AddOrEditBrand";
+import { adminRouter } from "./router";
 import Dashboard from "./components/dashboard/Dashboard";
+import { Fragment } from "react";
 function App() {
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<Dashboard />} path="/"></Route>
-          {/* <Route element={<Home />} path="/dash"></Route> */}
-          <Route element={<AddOrEdit />} path="/category/add"></Route>
-          <Route element={<AddOrEdit />} path="/category/add/:id"></Route>
-          <Route element={<ListCatagories />} path="/categories"></Route>
-          <Route element={<ListBrand />} path="/listbrand"></Route>
-          <Route element={<AddOrEditBrand />} path="/brand/add"></Route>
-          <Route element={<AddOrEditBrand />} path="/brand/add/:id"></Route>
-          <Route element={<LoginPage />} path="/login"></Route>
-          <Route element={<Register />} path="/register"></Route>
-        </Routes>
-      </BrowserRouter>
+      <Router>
+        <div className="App">
+          <Routes>
+            {adminRouter?.map((route, index) => {
+              let Layout = Dashboard;
+              if (route.layout) {
+                Layout = route.layout;
+              } else if (route.layout === null) {
+                Layout = Fragment;
+              }
+              const Page = route.component;
+              return (
+                <Route
+                  key={index}
+                  path={route.path}
+                  element={
+                    <Layout>
+                      <Page />
+                    </Layout>
+                  }
+                />
+              );
+            })}
+
+            {/* <Route path="/" element={<Login />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/company-work-schedule" element={<TrangChu />} /> */}
+          </Routes>
+        </div>
+      </Router>
     </Provider>
   );
 }
