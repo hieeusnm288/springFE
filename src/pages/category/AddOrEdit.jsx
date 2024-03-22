@@ -9,6 +9,7 @@ import {
 } from "../../redux/slice/categorySlice";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import Dashboard from "../../components/dashboard/Dashboard";
 
 const { Option } = Select;
 const layout = {
@@ -90,7 +91,7 @@ function AddOrEdit() {
   // console.log(id);
 
   return (
-    <div>
+    <Dashboard>
       <h3>{id ? "Update Category" : " Add Category"}</h3>
       <div>
         <Form
@@ -166,7 +167,7 @@ function AddOrEdit() {
           </Form.Item>
         </Form>
       </div>
-    </div>
+    </Dashboard>
   );
 }
 

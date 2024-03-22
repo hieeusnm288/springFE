@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import withRouter from "../../helpers/withRouter";
 import { useEffect, useState } from "react";
+import Dashboard from "../../components/dashboard/Dashboard";
 
 const layout = {
   labelCol: {
@@ -81,7 +82,7 @@ function AddOrEditBrand() {
   // console.log(id);
 
   return (
-    <div>
+    <Dashboard>
       <h3>{id ? "Update Brand" : "Add Brand"}</h3>
       <div>
         <Form
@@ -150,7 +151,7 @@ function AddOrEditBrand() {
           </Form.Item>
         </Form>
       </div>
-    </div>
+    </Dashboard>
   );
 }
 

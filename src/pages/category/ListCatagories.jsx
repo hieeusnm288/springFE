@@ -13,6 +13,7 @@ import { MdDelete, MdModeEditOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCategory, getListCate } from "../../redux/slice/categorySlice";
 import { useNavigate } from "react-router-dom";
+import Dashboard from "../../components/dashboard/Dashboard";
 function ListCatagories() {
   // const onDelete = (cate) => {
   //   console.log(cate);
@@ -112,7 +113,7 @@ function ListCatagories() {
   ];
 
   return (
-    <div>
+    <Dashboard>
       <h3>List Category</h3>
       <Table columns={columns} dataSource={listCategory} pagination={false} />
       <Pagination
@@ -130,7 +131,7 @@ function ListCatagories() {
           Bạn có muốn xóa Category: {categoryDetail ? categoryDetail.name : ""}
         </p>
       </Modal>
-    </div>
+    </Dashboard>
   );
 }
 

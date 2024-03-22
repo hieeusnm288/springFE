@@ -1,0 +1,19 @@
+body {
+    // background: rgb(164, 165, 208);
+}
+
+.layoutlogin {
+    .ant-tabs {
+        width : 600px;
+        margin: auto;
+    }
+
+    .ant-tabs-nav {
+        margin: 0;
+    }
+
+    .ant-tabs-content-holder {
+        background: rgba(190, 182, 182, 0.562);
+        height    : 90vh;
+    }
+}

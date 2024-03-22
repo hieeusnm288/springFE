@@ -11,15 +11,10 @@ import { BiSignal5 } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import "./Dashboard.scss";
 import { MdOutlineManageAccounts, MdLogout } from "react-icons/md";
-import { Outlet, Route, Routes, useNavigate } from "react-router-dom";
-import Home from "../home/Home";
-import AddOrEdit from "../category/AddOrEdit";
-import ListCatagories from "../category/ListCatagories";
-import ListBrand from "../brand/ListBrand";
-import AddOrEditBrand from "../brand/AddOrEditBrand";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const { Header, Sider, Content } = Layout;
-function Dashboard() {
+function Dashboard({ children }) {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -35,7 +30,7 @@ function Dashboard() {
           <Menu
             theme="dark"
             mode="inline"
-            defaultSelectedKeys={["1"]}
+            // defaultSelectedKeys={["1"]}
             items={[
               {
                 key: "1",
@@ -153,15 +148,7 @@ function Dashboard() {
               borderRadius: borderRadiusLG,
             }}
           >
-            <Routes>
-              <Route element={<Home />} path="/"></Route>
-              <Route element={<AddOrEdit />} path="/category/add"></Route>
-              <Route element={<AddOrEdit />} path="/category/add/:id"></Route>
-              <Route element={<ListCatagories />} path="/categories"></Route>
-              <Route element={<ListBrand />} path="/listbrand"></Route>
-              <Route element={<AddOrEditBrand />} path="/brand/add"></Route>
-              <Route element={<AddOrEditBrand />} path="/brand/add/:id"></Route>
-            </Routes>
+            {children}
             <Outlet></Outlet>
           </Content>
         </Layout>
