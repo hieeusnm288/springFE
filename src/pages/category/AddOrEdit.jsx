@@ -33,13 +33,12 @@ function AddOrEdit() {
   const { id } = useParams();
 
   const onFinish = (values) => {
-    console.log(values);
     if (id) {
       form.validateFields().then((values) => {
         dispatch(
           updateCategory({
             name: values.name,
-            id: id,
+            id: Number(id),
             status: values.status,
           })
         ).then((res) => {
@@ -76,7 +75,7 @@ function AddOrEdit() {
         if (id) {
           form.setFieldsValue({
             name: res.payload.name,
-            status: 0,
+            status: res.payload.status === "Invisible" ? 1 : 0,
           });
         }
       });
