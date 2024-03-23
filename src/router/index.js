@@ -5,12 +5,12 @@ import AddOrEditBrand from "../pages/brand/AddOrEditBrand";
 import ListBrand from "../pages/brand/ListBrand";
 import AddOrEdit from "../pages/category/AddOrEdit";
 import ListCatagories from "../pages/category/ListCatagories";
-import Home from "../pages/home/Home";
+import DashboardPage from "../pages/home/DashboardPage";
 
 const adminRouter = [
   { path: "/login", component: LoginPage, layout: null },
   { path: "/register", component: Register, layout: null },
-  { path: "/", component: Home, layout: Dashboard },
+  { path: "/", component: DashboardPage, layout: Dashboard },
 
   // Router Category
   { path: "/list-category", component: ListCatagories, layout: Dashboard },

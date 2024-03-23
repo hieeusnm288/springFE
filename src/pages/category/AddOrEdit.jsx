@@ -11,20 +11,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
 const { Option } = Select;
-const layout = {
-  labelCol: {
-    span: 8,
-  },
-  wrapperCol: {
-    span: 16,
-  },
-};
-const tailLayout = {
-  wrapperCol: {
-    offset: 8,
-    span: 16,
-  },
-};
 
 function AddOrEdit() {
   const [form] = Form.useForm();
@@ -49,7 +35,7 @@ function AddOrEdit() {
               description: "Dữ liệu đã được cập nhật",
               type: "success",
             });
-            navigate("/categories");
+            navigate("/list-category");
           }
         });
       });
@@ -62,7 +48,7 @@ function AddOrEdit() {
             description: "Dữ liệu đã được cập nhật",
             type: "success",
           });
-          navigate("/categories");
+          navigate("/list-category");
         }
       });
     }
@@ -92,59 +78,37 @@ function AddOrEdit() {
   // console.log(id);
 
   return (
-    <div>
-      {/* <h3>{id ? "Update Category" : " Add Category"}</h3> */}
-      <div>
-        <Form
-          {...layout}
-          form={form}
-          name="control-hooks"
-          onFinish={onFinish}
-          style={{
-            maxWidth: 800,
-            marginTop: "20px",
-          }}
-        >
-          <Form.Item
-            name="name"
-            label="Category Name"
-            rules={[
-              {
-                required: true,
-              },
-            ]}
+    <div className="add-category">
+      <div
+        className="card"
+        style={{
+          border: "none",
+          boxShadow:
+            "rgba(145, 158, 171, 0.2) 0px 0px 2px 0px, rgba(145, 158, 171, 0.12) 0px 12px 24px -4px",
+        }}
+      >
+        <div className="card-body">
+          <h5 className="card-title fw-semibold mb-4">
+            {id ? "Update Category" : "Add Category"}
+          </h5>
+          <div
+            className="card"
+            style={{
+              border: "none",
+              boxShadow:
+                "rgba(145, 158, 171, 0.2) 0px 0px 2px 0px, rgba(145, 158, 171, 0.12) 0px 12px 24px -4px",
+            }}
           >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name="status"
-            label="Status"
-            rules={[
-              {
-                required: true,
-              },
-            ]}
-          >
-            <Select
-              placeholder="Select a option and change input text above"
-              // onChange={onGenderChange}
-              allowClear
-            >
-              <Option value={0}>Visible</Option>
-              <Option value={1}>Invisible</Option>
-            </Select>
-          </Form.Item>
-          <Form.Item
-            noStyle
-            shouldUpdate={(prevValues, currentValues) =>
-              prevValues.gender !== currentValues.gender
-            }
-          >
-            {({ getFieldValue }) =>
-              getFieldValue("gender") === "other" ? (
+            <div className="card-body">
+              <Form
+                form={form}
+                name="control-hooks"
+                onFinish={onFinish}
+                layout="vertical"
+              >
                 <Form.Item
-                  name="customizeGender"
-                  label="Customize Gender"
+                  name="name"
+                  label="Category Name"
                   rules={[
                     {
                       required: true,
@@ -153,20 +117,57 @@ function AddOrEdit() {
                 >
                   <Input />
                 </Form.Item>
-              ) : null
-            }
-          </Form.Item>
-          <Form.Item {...tailLayout}>
-            <Space>
-              <Button type="primary" htmlType="submit">
-                Submit
-              </Button>
-              <Button htmlType="button" onClick={onReset}>
-                Reset
-              </Button>
-            </Space>
-          </Form.Item>
-        </Form>
+                <Form.Item
+                  name="status"
+                  label="Status"
+                  rules={[
+                    {
+                      required: true,
+                    },
+                  ]}
+                >
+                  <Select
+                    placeholder="Select a option and change input text above"
+                    // onChange={onGenderChange}
+                    allowClear
+                  >
+                    <Option value={0}>Visible</Option>
+                    <Option value={1}>Invisible</Option>
+                  </Select>
+                </Form.Item>
+                <Form.Item
+                  noStyle
+                  shouldUpdate={(prevValues, currentValues) =>
+                    prevValues.gender !== currentValues.gender
+                  }
+                >
+                  {({ getFieldValue }) =>
+                    getFieldValue("gender") === "other" ? (
+                      <Form.Item
+                        name="customizeGender"
+                        label="Customize Gender"
+                        rules={[
+                          {
+                            required: true,
+                          },
+                        ]}
+                      >
+                        <Input />
+                      </Form.Item>
+                    ) : null
+                  }
+                </Form.Item>
+                <Form.Item>
+                  <Space>
+                    <Button type="primary" htmlType="submit">
+                      Submit
+                    </Button>
+                  </Space>
+                </Form.Item>
+              </Form>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

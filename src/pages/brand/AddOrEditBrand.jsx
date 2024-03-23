@@ -6,20 +6,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import withRouter from "../../helpers/withRouter";
 import { useEffect, useState } from "react";
 
-const layout = {
-  labelCol: {
-    span: 8,
-  },
-  wrapperCol: {
-    span: 16,
-  },
-};
-const tailLayout = {
-  wrapperCol: {
-    offset: 8,
-    span: 16,
-  },
-};
 function AddOrEditBrand() {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
@@ -44,7 +30,7 @@ function AddOrEditBrand() {
             description: "Dữ liệu đã được cập nhật",
             type: "success",
           });
-          navigate("/listbrand");
+          navigate("/list-brands");
         }
       });
     });
@@ -81,74 +67,85 @@ function AddOrEditBrand() {
   // console.log(id);
 
   return (
-    <div>
-      {/* <h3>{id ? "Update Brand" : "Add Brand"}</h3> */}
-      <div>
-        <Form
-          {...layout}
-          form={form}
-          name="control-hooks"
-          onFinish={onFinish}
-          style={{
-            maxWidth: 800,
-            marginTop: "20px",
-          }}
-        >
-          <Form.Item
-            name="name"
-            label="Brand Name"
-            rules={[
-              {
-                required: true,
-              },
-            ]}
+    <div className="add-category">
+      <div
+        className="card"
+        style={{
+          border: "none",
+          boxShadow:
+            "rgba(145, 158, 171, 0.2) 0px 0px 2px 0px, rgba(145, 158, 171, 0.12) 0px 12px 24px -4px",
+        }}
+      >
+        <div className="card-body">
+          <h5 className="card-title fw-semibold mb-4">Add Brand</h5>
+          <div
+            className="card"
+            style={{
+              border: "none",
+              boxShadow:
+                "rgba(145, 158, 171, 0.2) 0px 0px 2px 0px, rgba(145, 158, 171, 0.12) 0px 12px 24px -4px",
+            }}
           >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="Upload Logo"
-            name="logoFile"
-            rules={[
-              {
-                required: true,
-              },
-            ]}
-            valuePropName="fileList"
-            getValueFromEvent={normFile}
-          >
-            <Upload
-              // action="/upload.do"
-              listType="picture-card"
-              accept=".jpg,.png,.gif"
-              maxCount={1}
-              beforeUpload={() => false}
-            >
-              <button
-                style={{
-                  border: 0,
-                  background: "none",
-                }}
-                type="button"
-              >
-                <PlusOutlined />
-                <div
-                  style={{
-                    marginTop: 8,
-                  }}
+            <div className="card-body">
+              <Form form={form} name="control-hooks" onFinish={onFinish}>
+                <Form.Item
+                  name="name"
+                  label="Brand Name"
+                  rules={[
+                    {
+                      required: true,
+                    },
+                  ]}
                 >
-                  Upload
-                </div>
-              </button>
-            </Upload>
-          </Form.Item>
-          <Form.Item {...tailLayout}>
-            <Space>
-              <Button type="primary" htmlType="submit">
-                Submit
-              </Button>
-            </Space>
-          </Form.Item>
-        </Form>
+                  <Input />
+                </Form.Item>
+                <Form.Item
+                  label="Upload Logo"
+                  name="logoFile"
+                  rules={[
+                    {
+                      required: true,
+                    },
+                  ]}
+                  valuePropName="fileList"
+                  getValueFromEvent={normFile}
+                >
+                  <Upload
+                    // action="/upload.do"
+                    listType="picture-card"
+                    accept=".jpg,.png,.gif"
+                    maxCount={1}
+                    beforeUpload={() => false}
+                  >
+                    <button
+                      style={{
+                        border: 0,
+                        background: "none",
+                      }}
+                      type="button"
+                    >
+                      <PlusOutlined />
+                      <div
+                        style={{
+                          marginTop: 8,
+                        }}
+                      >
+                        Upload
+                      </div>
+                    </button>
+                  </Upload>
+                </Form.Item>
+                <Form.Item>
+                  <Space>
+                    <Button type="primary" htmlType="submit">
+                      Submit
+                    </Button>
+                  </Space>
+                </Form.Item>
+              </Form>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
