@@ -1,28 +1,150 @@
 import React from "react";
-import { UserOutlined } from "@ant-design/icons";
+import { BellOutlined, UserOutlined } from "@ant-design/icons";
 import { TbBrandShopee } from "react-icons/tb";
 import { AiOutlineHome } from "react-icons/ai";
-import { Layout, Menu, theme, Row, Col, Avatar } from "antd";
+import { Layout, Menu, Avatar, Popover, Button } from "antd";
 import { BiLogoShopify, BiCategoryAlt } from "react-icons/bi";
 import { LiaFileInvoiceDollarSolid } from "react-icons/lia";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { FaRegListAlt } from "react-icons/fa";
 import "./Dashboard.scss";
 import { Outlet, useNavigate } from "react-router-dom";
+import logo from "../../image/logo.svg";
 
-const { Header, Sider, Content } = Layout;
+// const { Header, Sider, Content } = Layout;
 function Dashboard({ children }) {
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
   // const [collapsed, setCollapsed] = useState(false);
 
   const navigate = useNavigate();
 
-  return (
+  const content = (
     <div>
-      <Layout>
-        <Sider trigger={null} collapsible className="fix-top">
+      <p>Đây là Thông báo 1</p>
+      <p>Đây là Thông báo 2</p>
+      <p>Đây là Thông báo 3</p>
+    </div>
+  );
+
+  const contentAccount = (
+    <div>
+      <p>My Profile</p>
+      <p>Đổi mật khẩu</p>
+      <p>Lougout</p>
+    </div>
+  );
+
+  return (
+    <div className="dasboard">
+      <aside className="left-site">
+        <div>
+          <div className="brand-name d-flex align-items-center justify-content-between">
+            <div className="name-brand text-nowrap mt-3">
+              <img src={logo} width={250} />
+            </div>
+          </div>
+          <div className="slide-bar-menu mt-3">
+            <Menu
+              mode="inline"
+              // defaultSelectedKeys={["1"]}
+              items={[
+                {
+                  key: "1",
+                  icon: <AiOutlineHome />,
+                  label: "Dashboard",
+                  onClick: () => navigate("/"),
+                },
+                {
+                  key: "2",
+                  icon: <BiCategoryAlt />,
+                  label: "Categories",
+                  children: [
+                    {
+                      key: "3",
+                      icon: <IoMdAddCircleOutline />,
+                      label: "Add Category",
+                      onClick: () => navigate("/category/add"),
+                    },
+                    {
+                      key: "4",
+                      icon: <FaRegListAlt />,
+                      label: "List Categories",
+                      onClick: () => navigate("/list-category"),
+                    },
+                  ],
+                },
+                {
+                  key: "5",
+                  icon: <TbBrandShopee />,
+                  label: "Products",
+                  children: [
+                    {
+                      key: "6",
+                      icon: <IoMdAddCircleOutline />,
+                      label: "Add Product",
+                    },
+                    {
+                      key: "7",
+                      icon: <FaRegListAlt />,
+                      label: "List Products",
+                    },
+                  ],
+                },
+                {
+                  key: "8",
+                  icon: <BiLogoShopify />,
+                  label: "Brands",
+                  children: [
+                    {
+                      key: "9",
+                      icon: <IoMdAddCircleOutline />,
+                      label: "Add Brand",
+                      onClick: () => navigate("/brand/add"),
+                    },
+                    {
+                      key: "10",
+                      icon: <FaRegListAlt />,
+                      label: "List Brands",
+                      onClick: () => navigate("/list-brands"),
+                    },
+                  ],
+                },
+                {
+                  key: "11",
+                  icon: <LiaFileInvoiceDollarSolid />,
+                  label: "Invoice",
+                },
+              ]}
+            />
+          </div>
+        </div>
+      </aside>
+      <div className="body-wrapper">
+        <header className="app-header">
+          <nav className="navbar navbar-expand-lg navbar-light">
+            <Popover
+              content={content}
+              title="Thông Báo"
+              trigger="click"
+              placement="bottomLeft"
+            >
+              <BellOutlined />
+            </Popover>
+            <div className="navbar-collapse justify-content-end px-0">
+              <Popover
+                content={contentAccount}
+                title="Account"
+                trigger="click"
+                placement="bottomLeft"
+              >
+                <Avatar icon={<UserOutlined />}></Avatar>
+              </Popover>
+            </div>
+          </nav>
+        </header>
+        <div className="container mt-3">{children}</div>
+      </div>
+      {/* <Layout>
+        <Sider trigger={null} collapsible className="fix-top" width={300}>
           <div className="demo-logo-vertical" />
           <Menu
             theme="dark"
@@ -129,7 +251,7 @@ function Dashboard({ children }) {
             <Outlet></Outlet>
           </Content>
         </Layout>
-      </Layout>
+      </Layout> */}
     </div>
   );
 }

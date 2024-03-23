@@ -82,7 +82,7 @@ function AddOrEditBrand() {
 
   return (
     <div>
-      <h3>{id ? "Update Brand" : "Add Brand"}</h3>
+      {/* <h3>{id ? "Update Brand" : "Add Brand"}</h3> */}
       <div>
         <Form
           {...layout}

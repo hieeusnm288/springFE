@@ -1,39 +1,49 @@
-.ant-layout-sider {
-    min-height: 100vh;
-}
+.dasboard {
+    position: relative;
 
-// .ant-layout-sider {
-//     min-width: 300px !important;
-// }
-
-// svg {
-//     height: 1.8em;
-//     width : 1.8em;
-// }
-.fix-top {
-    overflow: auto !important;
-    height  : 100vh !important;
-    position: fixed !important;
-    left    : 0 !important;
-    top     : 0 !important;
-    bottom  : 0;
-}
-
-.fix-content {
-    margin-left: 200px;
-    height     : 100vh;
-
-    h1 {
-        margin     : auto;
-        margin-left: 30px;
+    .left-site {
+        width             : 300px;
+        background-color  : #fff;
+        position          : absolute;
+        -webkit-transition: 0.2s ease-in;
+        transition        : 0.2s ease-in;
+        height            : 100%;
+        z-index           : 11;
+        border-right      : 1px solid rgb(199, 222, 247);
+        height            : 100vh;
     }
 
-}
+    .brand-name {
+        min-height: 70px;
+        padding   : 0 24px;
 
-.app-header {
-    position  : relative;
-    z-index   : 50;
-    width     : 100%;
-    background: #fff;
-    padding   : 0 25px
+    }
+
+    .ant-menu-title-content {
+        font-size: 15px;
+    }
+
+    .body-wrapper {
+        position   : relative;
+        margin-left: 300px;
+        height     : 100vh;
+
+        .app-header {
+            position  : relative;
+            z-index   : 50;
+            width     : 100%;
+            background: #fff;
+            padding   : 0 25px;
+
+            // width     : calc(100% - 300px);
+            border-bottom: 1px solid rgb(199, 222, 247);
+
+            .navbar {
+                min-height: 70px;
+                padding   : 0;
+            }
+        }
+    }
+
+
 }

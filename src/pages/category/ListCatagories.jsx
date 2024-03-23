@@ -113,7 +113,7 @@ function ListCatagories() {
 
   return (
     <div>
-      <h3>List Category</h3>
+      {/* <h3>List Category</h3> */}
       <Table columns={columns} dataSource={listCategory} pagination={false} />
       <Pagination
         total={totalElements}
