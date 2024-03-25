@@ -232,8 +232,8 @@ function DashboardPage() {
                   </select>
                 </div>
               </div>
-              <div>
-                <BarChart width={820} height={350} data={data} barSize={30}>
+              <ResponsiveContainer width="100%" height={350}>
+                <BarChart data={data} barSize={30}>
                   <CartesianGrid strokeDasharray="1 1" />
                   <XAxis dataKey="name" />
                   <YAxis />
@@ -241,7 +241,7 @@ function DashboardPage() {
                   {/* <Legend /> */}
                   <Bar dataKey="pv" fill="#8884d8" />
                 </BarChart>
-              </div>
+              </ResponsiveContainer>
             </div>
           </div>
         </div>
@@ -263,7 +263,7 @@ function DashboardPage() {
                     </h5>
                     <div className="row align-items-center">
                       <div className="col-12">
-                        <ResponsiveContainer width={350} height={400}>
+                        <ResponsiveContainer width="100%" height={400}>
                           <RadarChart
                             cx="50%"
                             cy="50%"
