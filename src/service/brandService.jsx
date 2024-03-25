@@ -21,6 +21,7 @@ const brandService = {
     if (brand.logoFile[0].originFileObj) {
       formData.append("logoFile", brand.logoFile[0].originFileObj);
     }
+
     return axios.put(`/brand/${brand.id}`, formData);
   },
   insertBrand(brand) {

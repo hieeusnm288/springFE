@@ -30,7 +30,7 @@ function ListBrand() {
   const [brandDetail, setBrandDetail] = useState();
   const dispatch = useDispatch();
   const { listBrand, totalElements } = useSelector((state) => state.brand);
-  console.log(totalElements);
+
   const [key, setKey] = useState({
     query: "",
     page: 0,
@@ -66,7 +66,7 @@ function ListBrand() {
   const handleOkUpdate = () => {
     setIsModalUpdateOpen(false);
     form.validateFields().then((values) => {
-      console.log("logo ", values.logoFile);
+      // console.log("logo ", values.logoFile);
       dispatch(
         updateBrand({
           id: values.id,
@@ -98,7 +98,7 @@ function ListBrand() {
   };
 
   const handleEdit = (brand) => {
-    console.log(brand);
+    // console.log(brand);
     setIsModalUpdateOpen(true);
     form.setFieldsValue({
       id: brand.id,
@@ -115,7 +115,7 @@ function ListBrand() {
   };
 
   const conChangePage = (page) => {
-    console.log(page);
+    // console.log(page);
     dispatch(
       getListBrand({
         query: key.query,
