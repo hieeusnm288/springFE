@@ -3,7 +3,7 @@ import axios from "./customaxios";
 const brandService = {
   getListBrand(key) {
     return axios.get(
-      `/brand/find?query=${key.query}&size=5&sort=id&page=${key.page}`
+      `/brand/find?query=${key.query}&size=10&sort=id&page=${key.page}`
     );
   },
   deleteBrand(id) {

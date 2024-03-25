@@ -60,11 +60,11 @@ function ListCatagories() {
 
   const columns = [
     {
-      title: "ID",
+      title: "STT",
       dataIndex: "id",
       key: "id",
       width: 100,
-      // render: (text) => <a>{text}</a>,
+      render: (val, record, index) => <>{index + 1}</>,
     },
     {
       title: "Name",

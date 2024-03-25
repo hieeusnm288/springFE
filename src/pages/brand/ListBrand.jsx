@@ -30,14 +30,15 @@ function ListBrand() {
   const [brandDetail, setBrandDetail] = useState();
   const dispatch = useDispatch();
   const { listBrand, totalElements } = useSelector((state) => state.brand);
+  console.log(totalElements);
   const [key, setKey] = useState({
     query: "",
     page: 0,
   });
-
+  const [form] = Form.useForm();
   useEffect(() => {
     dispatch(getListBrand(key));
-  }, [key, dispatch]);
+  }, [key, dispatch, form]);
 
   // console.log(listCategory);
   const showModal = (brand) => {
@@ -65,7 +66,7 @@ function ListBrand() {
   const handleOkUpdate = () => {
     setIsModalUpdateOpen(false);
     form.validateFields().then((values) => {
-      console.log(values.logoFile);
+      console.log("logo ", values.logoFile);
       dispatch(
         updateBrand({
           id: values.id,
@@ -79,6 +80,7 @@ function ListBrand() {
             description: "Dữ liệu đã được cập nhật",
             type: "success",
           });
+          // setBrandDetail(null);
           setKey({
             query: "",
             page: 0,
@@ -96,12 +98,30 @@ function ListBrand() {
   };
 
   const handleEdit = (brand) => {
+    console.log(brand);
     setIsModalUpdateOpen(true);
-    setBrandDetail(brand);
+    form.setFieldsValue({
+      id: brand.id,
+      name: brand.name,
+      logoFile: [
+        {
+          url: brand
+            ? `https://springbe-production.up.railway.app/api/v1/brand/logo/${brand.logo}`
+            : "",
+        },
+      ],
+    });
+    // setBrandDetail(brand);
   };
 
   const conChangePage = (page) => {
-    dispatch(getListBrand(key.query, page - 1));
+    console.log(page);
+    dispatch(
+      getListBrand({
+        query: key.query,
+        page: page - 1,
+      })
+    );
   };
 
   const columns = [
@@ -110,7 +130,7 @@ function ListBrand() {
       dataIndex: "id",
       key: "id",
       width: 100,
-      // render: (text) => <a>{text}</a>,
+      render: (val, record, index) => <>{index + 1}</>,
     },
     {
       title: "Name",
@@ -154,7 +174,7 @@ function ListBrand() {
       ),
     },
   ];
-  const [form] = Form.useForm();
+
   const normFile = (e) => {
     if (Array.isArray(e)) {
       return e;
@@ -191,6 +211,7 @@ function ListBrand() {
         total={totalElements}
         onChange={conChangePage}
         style={{ float: "right", marginTop: "20px" }}
+        pageSize={10}
       />
       <Modal
         title="Delete Category"
@@ -218,7 +239,7 @@ function ListBrand() {
           <Form.Item
             name="id"
             label="Brand Id"
-            initialValue={brandDetail ? brandDetail.id : ""}
+            // initialValue={brandDetail ? brandDetail.id : ""}
             rules={[
               {
                 required: true,
@@ -230,7 +251,7 @@ function ListBrand() {
           <Form.Item
             name="name"
             label="Brand Name"
-            initialValue={brandDetail ? brandDetail.name : ""}
+            // initialValue={brandDetail ? brandDetail.name : ""}
             rules={[
               {
                 required: true,
@@ -247,13 +268,13 @@ function ListBrand() {
                 required: true,
               },
             ]}
-            initialValue={[
-              {
-                url: brandDetail
-                  ? `https://springbe-production.up.railway.app/api/v1/brand/logo/${brandDetail.logo}`
-                  : "",
-              },
-            ]}
+            // initialValue={[
+            // {
+            //   url: brandDetail
+            //     ? `https://springbe-production.up.railway.app/api/v1/brand/logo/${brandDetail.logo}`
+            //     : "",
+            // },
+            // ]}
             valuePropName="fileList"
             getValueFromEvent={normFile}
           >
