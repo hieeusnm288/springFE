@@ -32,6 +32,9 @@ const brandService = {
     }
     return axios.post("/brand", formData);
   },
+  getImageBrand(url) {
+    return axios.get(`/brand/logo/${url}`);
+  },
 };
 
 export default brandService;

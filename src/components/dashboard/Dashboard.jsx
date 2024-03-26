@@ -81,11 +81,13 @@ function Dashboard({ children }) {
                       key: "6",
                       icon: <IoMdAddCircleOutline />,
                       label: "Add Product",
+                      onClick: () => navigate("/product/add"),
                     },
                     {
                       key: "7",
                       icon: <FaRegListAlt />,
                       label: "List Products",
+                      onClick: () => navigate("/list-products"),
                     },
                   ],
                 },

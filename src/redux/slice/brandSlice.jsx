@@ -24,7 +24,6 @@ export const insertBrand = createAsyncThunk(
 export const updateBrand = createAsyncThunk(
   "brand/updateBrand",
   async (data) => {
-    console.log("slice", data);
     const updateBrand = await brandService.updateBrand(data);
     return updateBrand;
   }

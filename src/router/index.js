@@ -6,6 +6,8 @@ import ListBrand from "../pages/brand/ListBrand";
 import AddOrEdit from "../pages/category/AddOrEdit";
 import ListCatagories from "../pages/category/ListCatagories";
 import DashboardPage from "../pages/home/DashboardPage";
+import AddProduct from "../pages/product/AddProduct";
+import ListProduct from "../pages/product/ListProduct";
 
 const adminRouter = [
   { path: "/login", component: LoginPage, layout: null },
@@ -37,19 +39,24 @@ const adminRouter = [
     layout: Dashboard,
   },
 
-  //   // Danh Bạ
-  //   {
-  //     path: "/utility/contacts",
-  //     component: DanhBa,
-  //     layout: Dashboard,
-  //   },
+  // Router Product
+  {
+    path: "/list-products",
+    component: ListProduct,
+    layout: Dashboard,
+  },
+  {
+    path: "/product/add",
+    component: AddProduct,
+    layout: Dashboard,
+  },
 
-  //   //Tài Khoản
-  //   {
-  //     path: "/user-account-management",
-  //     component: TaiKhoan,
-  //     layout: Dashboard,
-  //   },
+  //Tài Khoản
+  // {
+  //   path: "/user-account-management",
+  //   component: TaiKhoan,
+  //   layout: Dashboard,
+  // },
 ];
 
 const guestRouter = [];

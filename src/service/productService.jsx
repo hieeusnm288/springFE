@@ -17,7 +17,7 @@ const productService = {
   },
   getListProduct(param) {
     return axios.get(
-      `/product/search?name=${param.name}&categoryId=${param.categoryId}&brandId=${param.brandId}&page=0&size=10`
+      `/product/search?name=${param.name}&categoryId=${param.categoryId}&brandId=${param.brandId}&page=${param.page}&size=10`
     );
   },
   deleteProduct(id) {
@@ -40,6 +40,9 @@ const productService = {
       formData.append("productFile", product.logoFile[0].originFileObj);
     }
     return axios.put(`product/${product.id}`, formData);
+  },
+  getImageProduct(url) {
+    return axios.get(`/product/image/${url}`);
   },
 };
 
