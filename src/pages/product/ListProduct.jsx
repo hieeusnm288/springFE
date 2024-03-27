@@ -4,22 +4,29 @@ import {
   Button,
   Space,
   Table,
-  Tag,
+  Select,
   Modal,
   Pagination,
   notification,
   Image,
+  Input,
 } from "antd";
 import { MdDelete, MdModeEditOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, getListProduct } from "../../redux/slice/productSlice";
 import { useNavigate } from "react-router-dom";
+import { getListCate } from "../../redux/slice/categorySlice";
+import { getListBrand } from "../../redux/slice/brandSlice";
 
 function ListProduct() {
+  const { Option } = Select;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [productDetail, setProductDetail] = useState();
   const dispatch = useDispatch();
+  const [nameSreach, setNameSearch] = useState("");
   const { ListProduct, totalElements } = useSelector((state) => state.product);
+  const { listCategory } = useSelector((state) => state.category);
+  const { listBrand } = useSelector((state) => state.brand);
   const [search, setSearch] = useState({
     name: "",
     categoryId: "",
@@ -28,7 +35,18 @@ function ListProduct() {
   });
   useEffect(() => {
     dispatch(getListProduct(search));
+  }, [dispatch, search]);
+
+  useEffect(() => {
+    dispatch(getListCate(0));
+    dispatch(
+      getListBrand({
+        query: "",
+        page: 0,
+      })
+    );
   }, [dispatch]);
+
   const navigate = useNavigate();
   const showModal = (product) => {
     setIsModalOpen(true);
@@ -166,8 +184,94 @@ function ListProduct() {
       ),
     },
   ];
+  const onSearch = () => {
+    setSearch({
+      name: nameSreach,
+      categoryId: search.categoryId,
+      brandId: search.brandId,
+      page: 0,
+    });
+    dispatch(
+      getListProduct({
+        name: nameSreach,
+        categoryId: search.categoryId,
+        brandId: search.brandId,
+        page: 0,
+      })
+    );
+  };
+  const onChangName = (e) => {
+    setNameSearch(e.target.value);
+  };
+
+  const onChangBrand = (value) => {
+    setSearch({
+      name: search.name,
+      categoryId: search.categoryId === 0 ? "" : search.categoryId,
+      brandId: value === 0 ? "" : value,
+      page: 0,
+    });
+  };
+
+  const onChangCate = (value) => {
+    setSearch({
+      name: search.name,
+      categoryId: value === 0 ? "" : value,
+      brandId: search.brandId === 0 ? "" : search.brandId,
+      page: 0,
+    });
+  };
+
   return (
     <div>
+      <div className="row mb-3">
+        <div className="col-6">
+          <div className="row">
+            <label className="form-label">Srearch Product By Nam</label>
+            <div className="col-8">
+              <Input onChange={onChangName} />
+            </div>
+            <div className="col-4">
+              <Button onClick={onSearch}>Search</Button>
+            </div>
+          </div>
+        </div>
+        <div className="col-6">
+          <div className="row">
+            <div className="col-6">
+              <label className="form-label">Filter by Category</label>
+              <br />
+              <Select
+                placeholder="Select a Category"
+                onChange={onChangCate}
+                style={{ width: "100%" }}
+                allowClear
+              >
+                <Option value={0}>All</Option>
+                {listCategory?.map((i) => (
+                  <Option value={i.id}>{i.name}</Option>
+                ))}
+              </Select>
+            </div>
+            <div className="col-6">
+              <label className="form-label">Filter by Brand</label>
+              <br />
+              <Select
+                placeholder="Select a Brand"
+                onChange={onChangBrand}
+                // className="form-select"
+                style={{ width: "100%" }}
+                allowClear
+              >
+                <Option value={0}>All</Option>
+                {listBrand?.map((i) => (
+                  <Option value={i.id}>{i.name}</Option>
+                ))}
+              </Select>
+            </div>
+          </div>
+        </div>
+      </div>
       <p>List Product</p>
       <Table
         columns={columns}

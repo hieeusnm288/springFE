@@ -206,6 +206,7 @@ function ListBrand() {
           <Button onClick={onSearch}>Search</Button>
         </Col>
       </Row>
+      <p>List Brand</p>
       <Table columns={columns} dataSource={listBrand} pagination={false} />
       <Pagination
         total={totalElements}
