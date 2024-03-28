@@ -10,6 +10,7 @@ import {
   notification,
   Image,
   Input,
+  Tag,
 } from "antd";
 import { MdDelete, MdModeEditOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
@@ -156,8 +157,10 @@ function ListProduct() {
       dataIndex: "status",
       key: "status",
       width: 300,
-      render: (val, record, index) => (
-        <>{record.status === 1 ? "Đang Bán" : "Ngừng Bán"}</>
+      render: (_, record) => (
+        <Tag color={record.status === 1 ? "green" : "red"} key={record.status}>
+          {record.status === 1 ? "Visible" : "Invisible"}
+        </Tag>
       ),
     },
     {
