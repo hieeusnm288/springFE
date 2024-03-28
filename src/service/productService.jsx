@@ -8,11 +8,12 @@ const productService = {
     formData.append("status", product.status);
     formData.append("specifications", product.specifications);
     formData.append("description", product.description);
-    formData.append("category_id", product.categoryId);
-    formData.append("brand_id", product.brandId);
+    formData.append("category_id", product.category_id);
+    formData.append("brand_id", product.brand_id);
     if (product.productFile[0].originFileObj) {
-      formData.append("productFile", product.logoFile[0].originFileObj);
+      formData.append("productFile", product.productFile[0].originFileObj);
     }
+
     return axios.post("/product", formData);
   },
   getListProduct(param) {
@@ -27,6 +28,7 @@ const productService = {
     return axios.get(`product/${id}`);
   },
   updateProduct(product) {
+    console.log("Service: ", product);
     let formData = new FormData();
     formData.append("name", product.name);
     formData.append("price", product.price);
@@ -34,10 +36,10 @@ const productService = {
     formData.append("status", product.status);
     formData.append("specifications", product.specifications);
     formData.append("description", product.description);
-    formData.append("category_id", product.categoryId);
-    formData.append("brand_id", product.brandId);
+    formData.append("category_id", product.category_id);
+    formData.append("brand_id", product.brand_id);
     if (product.productFile[0].originFileObj) {
-      formData.append("productFile", product.logoFile[0].originFileObj);
+      formData.append("productFile", product.productFile[0].originFileObj);
     }
     return axios.put(`product/${product.id}`, formData);
   },

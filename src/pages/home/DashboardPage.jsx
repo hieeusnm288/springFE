@@ -331,8 +331,8 @@ function DashboardPage() {
               }}
             >
               <div className="card-body">
-                <div class="mb-3 mb-sm-0">
-                  <h5 class="card-title fw-semibold">Top Client</h5>
+                <div className="mb-3 mb-sm-0">
+                  <h5 className="card-title fw-semibold">Top Client</h5>
                   <Table
                     columns={columns2}
                     dataSource={dataTable2}
@@ -352,8 +352,8 @@ function DashboardPage() {
               }}
             >
               <div className="card-body">
-                <div class="mb-3 mb-sm-0">
-                  <h5 class="card-title fw-semibold">Top Product</h5>
+                <div className="mb-3 mb-sm-0">
+                  <h5 className="card-title fw-semibold">Top Product</h5>
                   <Table
                     columns={columns}
                     dataSource={dataTable1}

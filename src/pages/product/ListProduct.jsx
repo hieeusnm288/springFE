@@ -304,4 +304,4 @@ function ListProduct() {
   );
 }
 
-export default ListProduct;
+export default withRouter(ListProduct);

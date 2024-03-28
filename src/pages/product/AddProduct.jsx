@@ -7,6 +7,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { getListCate } from "../../redux/slice/categorySlice";
 import { getListBrand } from "../../redux/slice/brandSlice";
+import {
+  getDetailProduct,
+  insertProduct,
+  updateProduct,
+} from "../../redux/slice/productSlice";
+import withRouter from "../../helpers/withRouter";
 const { Option } = Select;
 function AddProduct() {
   const [specifications, setSpecifications] = useState("");
@@ -16,12 +22,101 @@ function AddProduct() {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [productDetail, setProductDetail] = useState();
   const { id } = useParams();
+
   const onFinish = (values) => {
-    form.validateFields().then((values) => {
-      console.log(values);
-    });
+    if (id) {
+      form.validateFields().then((values) => {
+        dispatch(
+          updateProduct({
+            id: id,
+            name: values.name,
+            price: values.price,
+            quantity: values.quantity,
+            status: values.status,
+            specifications: specifications,
+            description: description,
+            category_id: values.category,
+            brand_id: values.brand,
+            productFile: values.productFile,
+          })
+        ).then((res) => {
+          if (res.payload) {
+            notification.open({
+              message: "Thành công!",
+              description: "Dữ liệu đã được cập nhật",
+              type: "success",
+            });
+            navigate("/list-products");
+          }
+        });
+      });
+    } else {
+      form.validateFields().then((values) => {
+        dispatch(
+          insertProduct({
+            name: values.name,
+            price: values.price,
+            quantity: values.quantity,
+            status: values.status,
+            specifications: specifications,
+            description: description,
+            category_id: values.category,
+            brand_id: values.brand,
+            productFile: values.productFile,
+          })
+        ).then((res) => {
+          if (res.payload) {
+            notification.open({
+              message: "Thành công!",
+              description: "Dữ liệu đã được cập nhật",
+              type: "success",
+            });
+            navigate("/list-products");
+          }
+        });
+      });
+    }
   };
+  useEffect(() => {
+    if (id) {
+      dispatch(getDetailProduct(id)).then((res) => {
+        if (id) {
+          form.setFieldsValue({
+            name: res.payload.name,
+            status: res.payload.status,
+            price: res.payload.price,
+            quantity: res.payload.quantity,
+            category: res.payload.category.id,
+            brand: res.payload.brand.id,
+            productFile: [
+              {
+                url: res.payload.image
+                  ? `https://springbe-production.up.railway.app/api/v1/product/image/${res.payload.image}`
+                  : "",
+              },
+            ],
+          });
+          // setProductDetail(res.payload);
+          setDescription(res.payload.description);
+          setSpecifications(res.payload.specifications);
+        }
+      });
+    } else {
+      form.setFieldsValue({
+        name: "",
+        status: 0,
+        price: "",
+        quantity: "",
+        category_id: 1,
+        brand_id: 1,
+      });
+      setDescription("");
+      setSpecifications("");
+    }
+  }, [dispatch, form, id]);
+
   const normFile = (e) => {
     if (Array.isArray(e)) {
       return e;
@@ -286,4 +381,4 @@ function AddProduct() {
   );
 }
 
-export default AddProduct;
+export default withRouter(AddProduct);

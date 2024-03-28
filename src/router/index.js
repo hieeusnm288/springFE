@@ -50,6 +50,11 @@ const adminRouter = [
     component: AddProduct,
     layout: Dashboard,
   },
+  {
+    path: "/product/add/:id",
+    component: AddProduct,
+    layout: Dashboard,
+  },
 
   //Tài Khoản
   // {
