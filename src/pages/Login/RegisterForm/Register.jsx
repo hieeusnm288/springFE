@@ -1,12 +1,34 @@
 import React from "react";
-import { Button, Form, Input } from "antd";
-
+import { Button, Form, Input, notification } from "antd";
+import { useDispatch, useSelector } from "react-redux";
 import "./registerstyle.scss";
 import { useNavigate } from "react-router-dom";
+import { registerAccount } from "../../../redux/slice/accountSlice";
 
 function Register() {
+  const dispatch = useDispatch();
+  const [form] = Form.useForm();
   const onFinish = (values) => {
-    console.log("Success:", values);
+    form.validateFields().then((values) => {
+      dispatch(
+        registerAccount({
+          name: values.name,
+          username: values.username,
+          phone: values.phone,
+          password: values.password,
+          email: values.email,
+        })
+      ).then((res) => {
+        if (res.payload) {
+          notification.open({
+            message: "Đăng ký thành công!",
+            description: "Bạn đã đăng ký thành khoản thành công!",
+            type: "success",
+          });
+          navigate("/login");
+        }
+      });
+    });
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -25,19 +47,32 @@ function Register() {
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             layout="vertical"
+            form={form}
           >
             <h2>Member Register</h2>
             <Form.Item
-              label="Name"
+              label="Full Name"
               name="name"
               rules={[
                 {
                   required: true,
-                  message: "Please input your email!",
+                  message: "Please input your Full Name!",
                 },
               ]}
             >
-              <Input placeholder="Enter your email address" />
+              <Input placeholder="Enter your Full Name" />
+            </Form.Item>
+            <Form.Item
+              label="Username"
+              name="username"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your username!",
+                },
+              ]}
+            >
+              <Input placeholder="Enter your Username" />
             </Form.Item>
             <Form.Item
               label="Phone Number"
@@ -45,11 +80,11 @@ function Register() {
               rules={[
                 {
                   required: true,
-                  message: "Please input your email!",
+                  message: "Please input phone number",
                 },
               ]}
             >
-              <Input placeholder="Enter your email address" />
+              <Input placeholder="Enter your phonr numbe" />
             </Form.Item>
             <Form.Item
               label="Email"
@@ -82,6 +117,16 @@ function Register() {
                 {
                   required: true,
                   message: "Please input your password!",
+                },
+                {
+                  validator: (_, value) => {
+                    if (!value || value === form.getFieldValue("password")) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject(
+                      new Error("Mật khẩu xác nhận không khớp!")
+                    );
+                  },
                 },
               ]}
             >

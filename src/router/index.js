@@ -1,4 +1,7 @@
+import DashbordClient from "../components/dasbordclient/DashbordClient";
 import Dashboard from "../components/dashboard/Dashboard";
+import CartPage from "../pages/CartPage/CartPage";
+import DetailProduct from "../pages/DetailProduct/DetailProduct";
 import LoginPage from "../pages/Login/FormLogin/LoginPage";
 import Register from "../pages/Login/RegisterForm/Register";
 import AddOrEditBrand from "../pages/brand/AddOrEditBrand";
@@ -6,52 +9,55 @@ import ListBrand from "../pages/brand/ListBrand";
 import AddOrEdit from "../pages/category/AddOrEdit";
 import ListCatagories from "../pages/category/ListCatagories";
 import DashboardPage from "../pages/home/DashboardPage";
+import ListProductClient from "../pages/listproductclent/ListProductClient";
 import AddProduct from "../pages/product/AddProduct";
 import ListProduct from "../pages/product/ListProduct";
 
 const adminRouter = [
-  { path: "/login", component: LoginPage, layout: null },
-  { path: "/register", component: Register, layout: null },
-  { path: "/", component: DashboardPage, layout: Dashboard },
+  { path: "/admin/dashboard", component: DashboardPage, layout: Dashboard },
 
   // Router Category
-  { path: "/list-category", component: ListCatagories, layout: Dashboard },
   {
-    path: "/category/add",
+    path: "/admin/list-category",
+    component: ListCatagories,
+    layout: Dashboard,
+  },
+  {
+    path: "/admin/category/add",
     component: AddOrEdit,
     layout: Dashboard,
   },
   {
-    path: "/category/add/:id",
+    path: "/admin/category/add/:id",
     component: AddOrEdit,
     layout: Dashboard,
   },
 
   //Router Brand
   {
-    path: "/list-brands",
+    path: "/admin/list-brands",
     component: ListBrand,
     layout: Dashboard,
   },
   {
-    path: "/brand/add",
+    path: "/admin/brand/add",
     component: AddOrEditBrand,
     layout: Dashboard,
   },
 
   // Router Product
   {
-    path: "/list-products",
+    path: "/admin/list-products",
     component: ListProduct,
     layout: Dashboard,
   },
   {
-    path: "/product/add",
+    path: "/admin/product/add",
     component: AddProduct,
     layout: Dashboard,
   },
   {
-    path: "/product/add/:id",
+    path: "/admin/product/add/:id",
     component: AddProduct,
     layout: Dashboard,
   },
@@ -64,6 +70,29 @@ const adminRouter = [
   // },
 ];
 
-const guestRouter = [];
+const publicRouter = [
+  { path: "/login", component: LoginPage, layout: null },
+  { path: "/register", component: Register, layout: null },
+  {
+    path: "/",
+    component: ListProductClient,
+    layout: DashbordClient,
+  },
+  {
+    path: "/shop-product/:slug",
+    component: ListProductClient,
+    layout: DashbordClient,
+  },
+  {
+    path: "/shop-product-detail/:id",
+    component: DetailProduct,
+    layout: DashbordClient,
+  },
+  {
+    path: "/shop-product/cart-pge",
+    component: CartPage,
+    layout: DashbordClient,
+  },
+];
 
-export { adminRouter, guestRouter };
+export { adminRouter, publicRouter };

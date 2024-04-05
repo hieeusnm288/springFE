@@ -35,7 +35,6 @@ export const getCategory = createAsyncThunk(
 export const updateCategory = createAsyncThunk(
   "category/updateCategory",
   async (data) => {
-    console.log(data);
     const categoryUpdate = await categoryService.updateCategory(data);
     return categoryUpdate;
   }

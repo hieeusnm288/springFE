@@ -30,7 +30,7 @@ function AddOrEditBrand() {
             description: "Dữ liệu đã được cập nhật",
             type: "success",
           });
-          navigate("/list-brands");
+          navigate("/admin/list-brands");
         }
       });
     });

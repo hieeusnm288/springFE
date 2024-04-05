@@ -8,9 +8,10 @@ import store from "./redux/store";
 // import ListCatagories from "./pages/category/ListCatagories";
 // import ListBrand from "./pages/brand/ListBrand";
 // import AddOrEditBrand from "./pages/brand/AddOrEditBrand";
-import { adminRouter } from "./router";
+import { adminRouter, publicRouter } from "./router";
 import Dashboard from "./components/dashboard/Dashboard";
 import { Fragment } from "react";
+import DashbordClient from "./components/dasbordclient/DashbordClient";
 function App() {
   return (
     <Provider store={store}>
@@ -38,9 +39,26 @@ function App() {
               );
             })}
 
-            {/* <Route path="/" element={<Login />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/company-work-schedule" element={<TrangChu />} /> */}
+            {publicRouter?.map((route, index) => {
+              let Layout = DashbordClient;
+              if (route.layout) {
+                Layout = route.layout;
+              } else if (route.layout === null) {
+                Layout = Fragment;
+              }
+              const Page = route.component;
+              return (
+                <Route
+                  key={index}
+                  path={route.path}
+                  element={
+                    <Layout>
+                      <Page />
+                    </Layout>
+                  }
+                />
+              );
+            })}
           </Routes>
         </div>
       </Router>

@@ -51,7 +51,7 @@ function ListCatagories() {
 
   const handleEdit = (cate) => {
     // console.log(cate);
-    navigate(`/category/add/${cate.id}`);
+    navigate(`/admin/category/add/${cate.id}`);
   };
 
   const conChangePage = (page) => {

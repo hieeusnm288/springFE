@@ -35,7 +35,7 @@ function AddOrEdit() {
               description: "Dữ liệu đã được cập nhật",
               type: "success",
             });
-            navigate("/list-category");
+            navigate("/admin/list-category");
           }
         });
       });
@@ -48,13 +48,10 @@ function AddOrEdit() {
             description: "Dữ liệu đã được cập nhật",
             type: "success",
           });
-          navigate("/list-category");
+          navigate("/admin/list-category");
         }
       });
     }
-  };
-  const onReset = () => {
-    form.resetFields();
   };
 
   useEffect(() => {

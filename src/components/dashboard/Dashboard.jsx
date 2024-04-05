@@ -2,13 +2,13 @@ import React from "react";
 import { BellOutlined, UserOutlined } from "@ant-design/icons";
 import { TbBrandShopee } from "react-icons/tb";
 import { AiOutlineHome } from "react-icons/ai";
-import { Layout, Menu, Avatar, Popover, Button } from "antd";
+import { Menu, Avatar, Popover } from "antd";
 import { BiLogoShopify, BiCategoryAlt } from "react-icons/bi";
 import { LiaFileInvoiceDollarSolid } from "react-icons/lia";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { FaRegListAlt } from "react-icons/fa";
 import "./Dashboard.scss";
-import { Outlet, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import logo from "../../image/logo.svg";
 
 // const { Header, Sider, Content } = Layout;
@@ -51,7 +51,7 @@ function Dashboard({ children }) {
                   key: "1",
                   icon: <AiOutlineHome />,
                   label: "Dashboard",
-                  onClick: () => navigate("/"),
+                  onClick: () => navigate("/admin/dashboard"),
                 },
                 {
                   key: "2",
@@ -62,13 +62,13 @@ function Dashboard({ children }) {
                       key: "3",
                       icon: <IoMdAddCircleOutline />,
                       label: "Add Category",
-                      onClick: () => navigate("/category/add"),
+                      onClick: () => navigate("/admin/category/add"),
                     },
                     {
                       key: "4",
                       icon: <FaRegListAlt />,
                       label: "List Categories",
-                      onClick: () => navigate("/list-category"),
+                      onClick: () => navigate("/admin/list-category"),
                     },
                   ],
                 },
@@ -81,13 +81,13 @@ function Dashboard({ children }) {
                       key: "6",
                       icon: <IoMdAddCircleOutline />,
                       label: "Add Product",
-                      onClick: () => navigate("/product/add"),
+                      onClick: () => navigate("/admin/product/add"),
                     },
                     {
                       key: "7",
                       icon: <FaRegListAlt />,
                       label: "List Products",
-                      onClick: () => navigate("/list-products"),
+                      onClick: () => navigate("/admin/list-products"),
                     },
                   ],
                 },
@@ -100,13 +100,13 @@ function Dashboard({ children }) {
                       key: "9",
                       icon: <IoMdAddCircleOutline />,
                       label: "Add Brand",
-                      onClick: () => navigate("/brand/add"),
+                      onClick: () => navigate("/admin/brand/add"),
                     },
                     {
                       key: "10",
                       icon: <FaRegListAlt />,
                       label: "List Brands",
-                      onClick: () => navigate("/list-brands"),
+                      onClick: () => navigate("/admin/list-brands"),
                     },
                   ],
                 },
@@ -168,13 +168,13 @@ function Dashboard({ children }) {
                     key: "3",
                     icon: <IoMdAddCircleOutline />,
                     label: "Add Category",
-                    onClick: () => navigate("/category/add"),
+                    onClick: () => navigate("/admin/category/add"),
                   },
                   {
                     key: "4",
                     icon: <FaRegListAlt />,
                     label: "List Categories",
-                    onClick: () => navigate("/list-category"),
+                    onClick: () => navigate("/admin/list-category"),
                   },
                 ],
               },

@@ -18,7 +18,7 @@ const productService = {
   },
   getListProduct(param) {
     return axios.get(
-      `/product/search?name=${param.name}&categoryId=${param.categoryId}&brandId=${param.brandId}&page=${param.page}&size=10`
+      `/product/search?name=${param.name}&categoryId=${param.categoryId}&brandId=${param.brandId}&page=${param.page}&size=12`
     );
   },
   deleteProduct(id) {

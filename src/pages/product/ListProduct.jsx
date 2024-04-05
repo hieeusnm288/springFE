@@ -79,7 +79,7 @@ function ListProduct() {
 
   const handleEdit = (product) => {
     // console.log(cate);
-    navigate(`/product/add/${product.id}`);
+    navigate(`/admin/product/add/${product.id}`);
   };
 
   const conChangePage = (page) => {

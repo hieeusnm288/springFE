@@ -22,7 +22,7 @@ function AddProduct() {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [productDetail, setProductDetail] = useState();
+  // const [productDetail, setProductDetail] = useState();
   const { id } = useParams();
 
   const onFinish = (values) => {
@@ -48,7 +48,7 @@ function AddProduct() {
               description: "Dữ liệu đã được cập nhật",
               type: "success",
             });
-            navigate("/list-products");
+            navigate("/admin/list-products");
           }
         });
       });
@@ -73,7 +73,7 @@ function AddProduct() {
               description: "Dữ liệu đã được cập nhật",
               type: "success",
             });
-            navigate("/list-products");
+            navigate("/admin/list-products");
           }
         });
       });
