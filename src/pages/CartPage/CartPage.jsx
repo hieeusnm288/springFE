@@ -21,7 +21,6 @@ function CartPage() {
     const token = localStorage.getItem("token");
     if (token) {
       const userData = jwtDecode(token);
-      console.log(userData);
       if (userData) {
         setUsername(userData.sub + "");
       }
@@ -59,7 +58,6 @@ function CartPage() {
           list: cartItems,
         })
       ).then((res) => {
-        console.log(res);
         if (res.payload) {
           notification.open({
             message: "Thành công!",
@@ -72,9 +70,7 @@ function CartPage() {
       });
     });
   };
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
+  const onFinishFailed = (errorInfo) => {};
   return (
     <div className="cart-page container">
       <div className="row">
