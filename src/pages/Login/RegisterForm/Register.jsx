@@ -30,9 +30,7 @@ function Register() {
       });
     });
   };
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
+  const onFinishFailed = (errorInfo) => {};
 
   const navigate = useNavigate();
 

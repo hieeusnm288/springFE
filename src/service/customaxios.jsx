@@ -4,7 +4,7 @@ const instance = axios.create({
   baseURL: "https://springbe-production.up.railway.app/api/v1",
   // baseURL: "http://localhost:8080/api/v1",
   headers: {
-    "Content-Type": "application/json",
+    // "Content-Type": "application/json",
     Authorization: `Bearer ${localStorage.getItem("token")?.replace(/"/g, "")}`,
   },
   timeout: 5000,

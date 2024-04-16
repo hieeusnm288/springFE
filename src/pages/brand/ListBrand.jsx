@@ -40,7 +40,6 @@ function ListBrand() {
     dispatch(getListBrand(key));
   }, [key, dispatch, form]);
 
-  // console.log(listCategory);
   const showModal = (brand) => {
     setIsModalOpen(true);
     setBrandDetail(brand);
@@ -66,7 +65,6 @@ function ListBrand() {
   const handleOkUpdate = () => {
     setIsModalUpdateOpen(false);
     form.validateFields().then((values) => {
-      // console.log("logo ", values.logoFile);
       dispatch(
         updateBrand({
           id: values.id,
@@ -98,7 +96,6 @@ function ListBrand() {
   };
 
   const handleEdit = (brand) => {
-    // console.log(brand);
     setIsModalUpdateOpen(true);
     form.setFieldsValue({
       id: brand.id,
@@ -115,7 +112,6 @@ function ListBrand() {
   };
 
   const conChangePage = (page) => {
-    // console.log(page);
     dispatch(
       getListBrand({
         query: key.query,

@@ -3,7 +3,7 @@ import axiosLogin from "./loginaxios";
 
 const accountService = {
   registerAccount(acc) {
-    return axios.post("/account", acc);
+    return axiosLogin.post("/account", acc);
   },
 
   getListAccount(param) {

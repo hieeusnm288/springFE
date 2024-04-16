@@ -28,7 +28,6 @@ function AddOrEdit() {
             status: values.status,
           })
         ).then((res) => {
-          console.log(res);
           if (res.payload) {
             notification.open({
               message: "Thành công!",
@@ -41,7 +40,6 @@ function AddOrEdit() {
       });
     } else {
       dispatch(insertCategory(values)).then((res) => {
-        console.log(res);
         if (res.payload) {
           notification.open({
             message: "Thành công!",
@@ -71,8 +69,6 @@ function AddOrEdit() {
       });
     }
   }, [dispatch, form, id]);
-
-  // console.log(id);
 
   return (
     <div className="add-category">

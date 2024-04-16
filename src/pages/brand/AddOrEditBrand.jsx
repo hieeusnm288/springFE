@@ -36,7 +36,6 @@ function AddOrEditBrand() {
     });
   };
 
-  console.log(brandDetial);
   useEffect(() => {
     if (id) {
       dispatch(getDetailBrand(id)).then((res) => {
@@ -64,7 +63,6 @@ function AddOrEditBrand() {
     }
     return e && e.fileList;
   };
-  // console.log(id);
 
   return (
     <div className="add-category">

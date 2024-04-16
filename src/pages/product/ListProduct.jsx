@@ -78,7 +78,6 @@ function ListProduct() {
   };
 
   const handleEdit = (product) => {
-    // console.log(cate);
     navigate(`/admin/product/add/${product.id}`);
   };
 
@@ -93,10 +92,7 @@ function ListProduct() {
     );
   };
 
-  const handleRowClick = (record) => {
-    // Handle row click logic here
-    console.log("Clicked row:", record);
-  };
+  const handleRowClick = (record) => {};
 
   const columns = [
     {

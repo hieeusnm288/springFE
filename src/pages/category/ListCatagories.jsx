@@ -14,9 +14,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteCategory, getListCate } from "../../redux/slice/categorySlice";
 import { useNavigate } from "react-router-dom";
 function ListCatagories() {
-  // const onDelete = (cate) => {
-  //   console.log(cate);
-  // };
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [categoryDetail, setCategoryDeatil] = useState();
   const dispatch = useDispatch();
@@ -27,7 +24,7 @@ function ListCatagories() {
     dispatch(getListCate(0));
   }, [dispatch]);
   const navigate = useNavigate();
-  // console.log(listCategory);
+
   const showModal = (cate) => {
     setIsModalOpen(true);
     setCategoryDeatil(cate);
@@ -50,7 +47,6 @@ function ListCatagories() {
   };
 
   const handleEdit = (cate) => {
-    // console.log(cate);
     navigate(`/admin/category/add/${cate.id}`);
   };
 

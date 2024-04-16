@@ -29,7 +29,6 @@ const productService = {
     return axios.get(`product/${id}`);
   },
   updateProduct(product) {
-    console.log("Service: ", product);
     let formData = new FormData();
     formData.append("name", product.name);
     formData.append("price", product.price);

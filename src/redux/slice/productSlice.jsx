@@ -4,7 +4,6 @@ import productService from "../../service/productService";
 export const insertProduct = createAsyncThunk(
   "product/insertProduct",
   async (data) => {
-    console.log("Slice", data);
     const insertProduct = await productService.insertProduct(data);
     return insertProduct;
   }
@@ -29,7 +28,6 @@ export const deleteProduct = createAsyncThunk(
 export const updateProduct = createAsyncThunk(
   "product/updateProduct",
   async (data) => {
-    console.log("slice", data);
     const updateProduct = await productService.updateProduct(data);
     return updateProduct;
   }

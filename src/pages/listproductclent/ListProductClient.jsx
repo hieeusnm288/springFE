@@ -7,7 +7,7 @@ import CradProduct from "../../components/crads/CradProduct";
 
 function ListProductClient() {
   const { slug } = useParams();
-  // console.log(slug);
+
   const { ListProduct } = useSelector((state) => state.product);
   const dispatch = useDispatch();
   const params = new URLSearchParams(slug);
