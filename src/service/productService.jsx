@@ -1,4 +1,5 @@
 import axios from "./customaxios";
+import axiosLogin from "./loginaxios";
 const productService = {
   insertProduct(product) {
     let formData = new FormData();
@@ -17,7 +18,7 @@ const productService = {
     return axios.post("/product", formData);
   },
   getListProduct(param) {
-    return axios.get(
+    return axiosLogin.get(
       `/product/search?name=${param.name}&categoryId=${param.categoryId}&brandId=${param.brandId}&page=${param.page}&size=12`
     );
   },

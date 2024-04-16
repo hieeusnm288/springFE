@@ -1,8 +1,8 @@
 import axios from "./customaxios";
-
+import axiosLogin from "./loginaxios";
 const brandService = {
   getListBrand(key) {
-    return axios.get(
+    return axiosLogin.get(
       `/brand/find?query=${key.query}&size=10&sort=id&page=${key.page}`
     );
   },

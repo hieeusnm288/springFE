@@ -6,15 +6,15 @@ import { getListCate } from "../../redux/slice/categorySlice";
 import { getListBrand } from "../../redux/slice/brandSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Badge } from "antd";
+import { Badge, Popover } from "antd";
+import { jwtDecode } from "jwt-decode";
 function DashbordClient({ children }) {
   const dispatch = useDispatch();
+  const [username, setUsername] = useState();
   const { listCategory } = useSelector((state) => state.category);
   const { listBrand } = useSelector((state) => state.brand);
   const [listCart, setListCart] = useState(
-    JSON.parse(localStorage.getItem("cartItems"))
-      ? JSON.parse(localStorage.getItem("cartItems"))
-      : []
+    JSON.parse(localStorage.getItem("cartItems")) || []
   );
   useEffect(() => {
     dispatch(getListCate(0));
@@ -30,6 +30,42 @@ function DashbordClient({ children }) {
   useEffect(() => {
     setListCart(JSON.parse(localStorage.getItem("cartItems")));
   }, [listCart]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const userData = jwtDecode(token);
+      if (userData) {
+        setUsername(userData.sub + "");
+      }
+    }
+  }, []);
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+
+  const contentAccount = (
+    <>
+      {username ? (
+        <div>
+          {/* <p>{username}</p> */}
+          <p
+            onClick={() => navigate("/my-order")}
+            style={{ cursor: "pointer" }}
+          >
+            Đơn hàng của tôi
+          </p>
+          <p onClick={logout} style={{ cursor: "pointer" }}>
+            Đăng xuất
+          </p>
+        </div>
+      ) : (
+        <>Đăng nhập</>
+      )}
+    </>
+  );
   return (
     <div className="dashborad-client">
       <div className="main">
@@ -43,7 +79,14 @@ function DashbordClient({ children }) {
                 style={{ fontSize: "25px" }}
               />
             </Badge>
-            <UserOutlined />
+            <Popover
+              content={contentAccount}
+              title="My Account"
+              trigger="click"
+              placement="bottomLeft"
+            >
+              <UserOutlined />
+            </Popover>
           </div>
         </div>
         {/* Slider */}

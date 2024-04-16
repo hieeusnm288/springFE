@@ -24,12 +24,17 @@ function Dashboard({ children }) {
       <p>Đây là Thông báo 3</p>
     </div>
   );
-
+  const logout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
   const contentAccount = (
     <div>
       <p>My Profile</p>
       <p>Đổi mật khẩu</p>
-      <p>Lougout</p>
+      <p onClick={logout} style={{ cursor: "pointer" }}>
+        Đăng xuất
+      </p>
     </div>
   );
 
@@ -114,6 +119,7 @@ function Dashboard({ children }) {
                   key: "11",
                   icon: <LiaFileInvoiceDollarSolid />,
                   label: "Invoice",
+                  onClick: () => navigate("/admin/invoice"),
                 },
               ]}
             />

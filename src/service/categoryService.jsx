@@ -1,11 +1,11 @@
 import axios from "./customaxios";
-
+import axiosLogin from "./loginaxios";
 const categoryService = {
   insertCategory(category) {
     return axios.post("/category", category);
   },
   getListCate(page) {
-    return axios.get(`/category/page?size=10&sort=id&page=${page}`);
+    return axiosLogin.get(`/category/page?size=10&sort=id&page=${page}`);
   },
   deleteCategory(id) {
     return axios.delete(`category/${id}`);

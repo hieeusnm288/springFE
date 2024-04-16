@@ -40,6 +40,14 @@ export const updateAccount = createAsyncThunk(
   }
 );
 
+export const loginAccount = createAsyncThunk(
+  "account/loginAccount",
+  async (data) => {
+    const loginAccount = await accountService.loginAccount(data);
+    return loginAccount;
+  }
+);
+
 const accountSlice = createSlice({
   name: "account",
   initialState: {

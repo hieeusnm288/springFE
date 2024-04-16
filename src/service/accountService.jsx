@@ -1,4 +1,6 @@
 import axios from "./customaxios";
+import axiosLogin from "./loginaxios";
+
 const accountService = {
   registerAccount(acc) {
     return axios.post("/account", acc);
@@ -17,6 +19,9 @@ const accountService = {
   },
   updateAccount(acc) {
     return axios.get(`account/${acc.id}`, acc);
+  },
+  loginAccount(acc) {
+    return axiosLogin.post("account/login", acc);
   },
 };
 

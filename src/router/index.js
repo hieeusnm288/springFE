@@ -9,6 +9,9 @@ import ListBrand from "../pages/brand/ListBrand";
 import AddOrEdit from "../pages/category/AddOrEdit";
 import ListCatagories from "../pages/category/ListCatagories";
 import DashboardPage from "../pages/home/DashboardPage";
+import DetailOrder from "../pages/listIOrderClinet/DetailOrder";
+import ListOrderClient from "../pages/listIOrderClinet/ListOrderClient";
+import ListOrderAdmin from "../pages/listorderadmin/ListOrderAdmin";
 import ListProductClient from "../pages/listproductclent/ListProductClient";
 import AddProduct from "../pages/product/AddProduct";
 import ListProduct from "../pages/product/ListProduct";
@@ -61,7 +64,11 @@ const adminRouter = [
     component: AddProduct,
     layout: Dashboard,
   },
-
+  {
+    path: "/admin/invoice",
+    component: ListOrderAdmin,
+    layout: Dashboard,
+  },
   //Tài Khoản
   // {
   //   path: "/user-account-management",
@@ -91,6 +98,16 @@ const publicRouter = [
   {
     path: "/shop-product/cart-pge",
     component: CartPage,
+    layout: DashbordClient,
+  },
+  {
+    path: "/my-order",
+    component: ListOrderClient,
+    layout: DashbordClient,
+  },
+  {
+    path: "/order-detail/:id",
+    component: DetailOrder,
     layout: DashbordClient,
   },
 ];

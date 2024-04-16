@@ -1,10 +1,29 @@
 import React from "react";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, notification } from "antd";
 import { useNavigate } from "react-router-dom";
 import "./loginstyle.scss";
+import { useDispatch } from "react-redux";
+import { loginAccount } from "../../../redux/slice/accountSlice";
 function LoginPage() {
+  const dispatch = useDispatch();
   const onFinish = (values) => {
-    console.log("Success:", values);
+    dispatch(loginAccount(values)).then((res) => {
+      if (res.payload) {
+        notification.open({
+          message: "Đăng nhập thành công!",
+          description: "Bạn đã đăng nhập thành khoản thành công!",
+          type: "success",
+        });
+        navigate("/");
+        localStorage.setItem("token", JSON.stringify(res.payload.jwt));
+      } else {
+        notification.open({
+          message: "Đăng nhập thất bại!",
+          description: "Vui lòng kiểm tra lại tài khoản và mật khẩu của bạn!",
+          type: "error",
+        });
+      }
+    });
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -25,8 +44,8 @@ function LoginPage() {
           >
             <h2>Member Login</h2>
             <Form.Item
-              label="Email"
-              name="email"
+              label="Username"
+              name="username"
               rules={[
                 {
                   required: true,
