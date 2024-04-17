@@ -1,11 +1,11 @@
 import axios from "./customaxios";
-
+import orderAxios from "./orderAxiois";
 const orderService = {
   getListOrder(key) {
     return axios.get(`/order/search?name=${key.name}&page=${key.page}&size=5`);
   },
   createOrder(data) {
-    return axios.post("/order", data);
+    return orderAxios.post("/order", data);
   },
   getDetailOrder(id) {
     return axios.get(`order_detail/${id}`);
